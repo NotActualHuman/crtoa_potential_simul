@@ -4,6 +4,7 @@ const upperString = document.querySelector('.upper-option');
 const lowerString = document.querySelector('.lower-option');
 const coinString = document.querySelector('.coins');
 const scrollString = document.querySelector('.scrolls');
+const cashString = document.querySelector('.cash');
 let equipSlot = '무기';
 
 let targetUpperGrade = 'SuperEpic';
@@ -319,6 +320,7 @@ function setGradeDetails(imgElement, colorElement, grade) {
 
 let paidAmount = 0;
 let usedScrolls;
+let usedCash = 0;
 function getOptionGrade() {
     // console.log(equipSlot);
     let upper = getRandomIntInclusive(0, 99);
@@ -338,6 +340,7 @@ function getOptionGrade() {
 
     paidAmount += 20000;
     usedScrolls = paidAmount / 20000;
+    usedCash += 275;
     // console.log(upperOption + lowerOption);
     if (upperOption.search('속성 공격력') !== -1)
         upperString.innerText = upperOption + ' +' + getValues(rawUpperOption, equipSlot) + '';
@@ -349,6 +352,7 @@ function getOptionGrade() {
         lowerString.innerText = lowerOption + ' +' + getValues(rawLowerOption, equipSlot) + '%';
     coinString.innerText = paidAmount;
     scrollString.innerText = usedScrolls;
+    cashString.innerText = usedCash;
 }
 
 function autoScrolls() {
@@ -400,22 +404,22 @@ function autoScrolls() {
             else
                 lowerString.innerText = lowerOption + ' +' + getValues(rawLowerOption, equipSlot) + '%';
 
-            coinString.innerText = paidAmount;
-            scrollString.innerText = usedScrolls;
-
             paidAmount += 20000;
             usedScrolls = paidAmount / 20000;
+            usedCash += 275;
+
             coinString.innerText = paidAmount;
             scrollString.innerText = usedScrolls;
+            cashString.innerText = usedCash + '\u20A9';
             return; // 조건을 만족하면 종료
         } else {
-            coinString.innerText = paidAmount;
-            scrollString.innerText = usedScrolls;
-
             paidAmount += 20000;
             usedScrolls = paidAmount / 20000;
+            usedCash += 275;
+
             coinString.innerText = paidAmount;
             scrollString.innerText = usedScrolls;
+            cashString.innerText = usedCash + '\u20A9';
             setTimeout(generateScrolls, delay); // 딜레이 후 재귀 호출
         }
     }
