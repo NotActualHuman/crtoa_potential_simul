@@ -1,10 +1,15 @@
-let upperImg = document.querySelector('.upper-grade');
-let lowerImg = document.querySelector('.lower-grade');
-let upperString = document.querySelector('.upper-option');
-let lowerString = document.querySelector('.lower-option');
-let coinString = document.querySelector('.coins');
-let scrollString = document.querySelector('.scrolls');
-let equipSlot;
+const upperImg = document.querySelector('.upper-grade');
+const lowerImg = document.querySelector('.lower-grade');
+const upperString = document.querySelector('.upper-option');
+const lowerString = document.querySelector('.lower-option');
+const coinString = document.querySelector('.coins');
+const scrollString = document.querySelector('.scrolls');
+let equipSlot = '무기';
+
+let targetUpperGrade = 'SuperEpic';
+let targetLowerGrade = 'SuperEpic';
+let targetUpperOption = '공격력';
+let targetLowerOption = '공격력';
 
 document.addEventListener('DOMContentLoaded', () => {
     const selectElement = document.querySelector('#equip');
@@ -12,6 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
     selectElement.addEventListener('change', (event) => {
         equipSlot = event.target.value;
     });
+
+    const upperGradeElement = document.querySelector('#upper-grade');
+    const lowerGradeElement = document.querySelector('#lower-grade');
+    const upperOptionElement = document.querySelector('#upper-option');
+    const lowerOptionElement = document.querySelector('#lower-option');
+
+    upperGradeElement.addEventListener('change', (event) => {
+        targetUpperGrade = event.target.value;
+    })
+    lowerGradeElement.addEventListener('change', (event) => {
+        targetLowerGrade = event.target.value;
+    })
+    upperOptionElement.addEventListener('change', (event) => {
+        targetUpperOption = event.target.value;
+    })
+    lowerOptionElement.addEventListener('change', (event) => {
+        targetLowerOption = event.target.value;
+    })
 });
 
 function getRandomIntInclusive(min, max) {
@@ -43,19 +66,14 @@ function getGrade(num) {
     switch (true) {
         case (num <= 5):
             return 'SuperEpic';
-            break;
         case (num <= 15):
             return 'Epic';
-            break;
         case (num <= 35):
             return 'Rare';
-            break;
         case (num <= 65):
             return 'Uncommon';
-            break;
         default:
             return 'Common';
-            break;
     }
 }
 
@@ -64,109 +82,76 @@ function getOption(num, slot) {
         switch (true) {
             case (num <= 909):  // 9.09% 확률
                 return '공격력';
-                break;
             case (num <= 1818): // 18.18% 확률
                 return 'HP';
-                break;
             case (num <= 2727): // 27.27% 확률
                 return '방어력';
-                break;
             case (num <= 3636): // 36.36% 확률
                 return '치명타 확률';
-                break;
             case (num <= 4545): // 45.45% 확률
                 return '치명타 피해';
-                break;
             case (num <= 5454): // 54.54% 확률
                 return '회복량';
-                break;
             case (num <= 6363): // 63.63% 확률
                 return '보호막량';
-                break;
             case (num <= 7272): // 72.72% 확률
                 return '버프 증폭';
-                break;
             case (num <= 8181): // 81.81% 확률
                 return '디버프 증폭';
-                break;
             case (num <= 9090): // 90.90% 확률
                 return '방어력 관통';
-                break;
             default:
                 return '받는 피해 감소'; // 나머지 9.09% 확률
-                break;
         }
     } else if (slot === '무기') {
         switch (true) {
             case (num <= 909):  // 9.09% 확률
                 return '공격력';
-                break;
             case (num <= 1818): // 18.18% 확률
                 return 'HP';
-                break;
             case (num <= 2727): // 27.27% 확률
                 return '방어력';
-                break;
             case (num <= 3636): // 36.36% 확률
                 return '치명타 확률';
-                break;
             case (num <= 4545): // 45.45% 확률
                 return '치명타 피해';
-                break;
             case (num <= 5454): // 54.54% 확률
                 return '불 속성 공격력';
-                break;
             case (num <= 6363): // 63.63% 확률
                 return '물 속성 공격력';
-                break;
             case (num <= 7272): // 72.72% 확률
                 return '바람 속성 공격력';
-                break;
             case (num <= 8181): // 81.81% 확률
                 return '대지 속성 공격력';
-                break;
             case (num <= 9090): // 90.90% 확률
                 return '빛 속성 공격력';
-                break;
             default:
                 return '어둠 속성 공격력'; // 나머지 9.09% 확률
-                break;
         }
     } else if (slot === '모자') {
         switch (true) {
             case (num <= 909):  // 9.09% 확률
                 return '공격력';
-                break;
             case (num <= 1818): // 18.18% 확률
                 return 'HP';
-                break;
             case (num <= 2727): // 27.27% 확률
                 return '방어력';
-                break;
             case (num <= 3636): // 36.36% 확률
                 return '치명타 확률';
-                break;
             case (num <= 4545): // 45.45% 확률
                 return '치명타 피해';
-                break;
             case (num <= 5454): // 54.54% 확률
                 return '불 속성 피해';
-                break;
             case (num <= 6363): // 63.63% 확률
                 return '물 속성 피해';
-                break;
             case (num <= 7272): // 72.72% 확률
                 return '바람 속성 피해';
-                break;
             case (num <= 8181): // 81.81% 확률
                 return '대지 속성 피해';
-                break;
             case (num <= 9090): // 90.90% 확률
                 return '빛 속성 피해';
-                break;
             default:
                 return '어둠 속성 피해'; // 나머지 9.09% 확률
-                break;
         }
     }
 }
@@ -321,7 +306,7 @@ function getValues(option, slot) {
 let paidAmount = 0;
 let usedScrolls;
 function getOptionGrade() {
-    console.log(equipSlot);
+    // console.log(equipSlot);
     let upper = getRandomIntInclusive(0, 99);
     let lower = getRandomIntInclusive(0, 99);
     let upperGrade = getGrade(upper);
@@ -352,7 +337,7 @@ function getOptionGrade() {
 
     paidAmount += 20000;
     usedScrolls = paidAmount / 20000;
-    console.log(upperOption + lowerOption);
+    // console.log(upperOption + lowerOption);
     if (upperOption.search('속성 공격력') !== -1)
         upperString.innerText = upperOption + ' +' + getValues(rawUpperOption, equipSlot) + '';
     else
@@ -361,9 +346,86 @@ function getOptionGrade() {
         lowerString.innerText = lowerOption + ' +' + getValues(rawLowerOption, equipSlot) + '';
     else
         lowerString.innerText = lowerOption + ' +' + getValues(rawLowerOption, equipSlot) + '%';
-
-
-
     coinString.innerText = paidAmount;
     scrollString.innerText = usedScrolls;
+}
+
+function autoScrolls() {
+    const delay = 10; // 딜레이 시간 (밀리초 단위)
+
+    function generateScrolls() {
+        let upper = getRandomIntInclusive(0, 99);
+        let lower = getRandomIntInclusive(0, 99);
+        let upperGrade = getGrade(upper);
+        let lowerGrade = getGrade(lower);
+        let upperOpt = getRandomIntInclusive(0, 9999);
+        let lowerOpt = getRandomIntInclusive(0, 9999);
+        let upperOption = getOption(upperOpt, equipSlot);
+        let lowerOption = getOption(lowerOpt, equipSlot);
+        let rawUpperOption = `${upperGrade}-${upperOption}`;
+        let rawLowerOption = `${lowerGrade}-${lowerOption}`;
+        // console.log("targetUpperGrade: " + targetUpperGrade + " targetUpperOption: " + targetUpperOption + "\ntargetLowerGrade: " + targetLowerGrade + " targetLowerOption: " + targetLowerOption);
+        if (targetUpperGrade === upperGrade && targetUpperOption === upperOption &&
+            targetLowerGrade === lowerGrade && targetLowerOption === lowerOption) {
+            const gradeDetails = {
+                'Common': { imgSrc: './img/Common.png', color: '#8D664D' },
+                'Uncommon': { imgSrc: './img/Uncommon.png', color: '#66FF66' },
+                'Rare': { imgSrc: './img/Rare.png', color: '#3399FF' },
+                'Epic': { imgSrc: './img/Epic.png', color: '#9933FF' },
+                'SuperEpic': { imgSrc: './img/SuperEpic.png', color: '#CF3D3D' }
+            };
+
+            function setGradeDetails(imgElement, colorElement, grade) {
+                const details = gradeDetails[grade] || { imgSrc: './img/Common.png', color: '#FFFFFF' };
+                imgElement.src = details.imgSrc;
+                colorElement.style.color = details.color;
+            }
+
+            setGradeDetails(upperImg, upperString, upperGrade);
+            setGradeDetails(lowerImg, lowerString, lowerGrade);
+
+            if (upperOption.search('속성 공격력') !== -1)
+                upperString.innerText = upperOption + ' +' + getValues(rawUpperOption, equipSlot) + '';
+            else
+                upperString.innerText = upperOption + ' +' + getValues(rawUpperOption, equipSlot) + '%';
+            if (lowerOption.search('속성 공격력') !== -1)
+                lowerString.innerText = lowerOption + ' +' + getValues(rawLowerOption, equipSlot) + '';
+            else
+                lowerString.innerText = lowerOption + ' +' + getValues(rawLowerOption, equipSlot) + '%';
+
+            coinString.innerText = paidAmount;
+            scrollString.innerText = usedScrolls;
+
+            paidAmount += 20000;
+            usedScrolls = paidAmount / 20000;
+            coinString.innerText = paidAmount;
+            scrollString.innerText = usedScrolls;
+            return; // 조건을 만족하면 종료
+        } else {
+            const gradeDetails = {
+                'Common': { imgSrc: './img/Common.png', color: '#8D664D' },
+                'Uncommon': { imgSrc: './img/Uncommon.png', color: '#66FF66' },
+                'Rare': { imgSrc: './img/Rare.png', color: '#3399FF' },
+                'Epic': { imgSrc: './img/Epic.png', color: '#9933FF' },
+                'SuperEpic': { imgSrc: './img/SuperEpic.png', color: '#CF3D3D' }
+            };
+
+            function setGradeDetails(imgElement, colorElement, grade) {
+                const details = gradeDetails[grade] || { imgSrc: './img/Common.png', color: '#FFFFFF' };
+                imgElement.src = details.imgSrc;
+                colorElement.style.color = details.color;
+            }
+
+            coinString.innerText = paidAmount;
+            scrollString.innerText = usedScrolls;
+
+            paidAmount += 20000;
+            usedScrolls = paidAmount / 20000;
+            coinString.innerText = paidAmount;
+            scrollString.innerText = usedScrolls;
+            setTimeout(generateScrolls, delay); // 딜레이 후 재귀 호출
+        }
+    }
+
+    generateScrolls(); // 최초 호출
 }
