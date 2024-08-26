@@ -5,7 +5,9 @@ const lowerString = document.querySelector('.lower-option');
 const coinString = document.querySelector('.coins');
 const scrollString = document.querySelector('.scrolls');
 const cashString = document.querySelector('.cash');
+
 let equipSlot = '무기';
+let scrollType = '일반';
 
 let targetUpperGrade = 'SuperEpic';
 let targetLowerGrade = 'SuperEpic';
@@ -14,10 +16,15 @@ let targetLowerOption = '공격력';
 
 document.addEventListener('DOMContentLoaded', () => {
     const selectElement = document.querySelector('#equip');
+    const scrollElement = document.querySelector('#type');
 
     selectElement.addEventListener('change', (event) => {
         equipSlot = event.target.value;
     });
+
+    scrollElement.addEventListener('change', (event) => {
+        scrollType = event.target.value;
+    })
 
     const upperGradeElement = document.querySelector('#upper-grade');
     const lowerGradeElement = document.querySelector('#lower-grade');
@@ -75,6 +82,17 @@ function getGrade(num) {
             return 'Uncommon';
         default:
             return 'Common';
+    }
+}
+
+function getGradeHigh(num) {
+    switch (true) {
+        case (num <= 30):
+            return 'SuperEpic';
+        case (num <= 40):
+            return 'Epic';
+        default:
+            return 'Rare';
     }
 }
 
@@ -325,8 +343,15 @@ function getOptionGrade() {
     // console.log(equipSlot);
     let upper = getRandomIntInclusive(0, 99);
     let lower = getRandomIntInclusive(0, 99);
-    let upperGrade = getGrade(upper);
-    let lowerGrade = getGrade(lower);
+    let upperGrade;
+    let lowerGrade;
+    if (scrollType === '일반') {
+        upperGrade = getGrade(upper);
+        lowerGrade = getGrade(lower);
+    } else if (scrollType === '상급') {
+        upperGrade = getGradeHigh(upper);
+        lowerGrade = getGradeHigh(lower);
+    }
     let upperOpt = getRandomIntInclusive(0, 9999);
     let lowerOpt = getRandomIntInclusive(0, 9999);
     let upperOption = getOption(upperOpt, equipSlot);
@@ -361,8 +386,15 @@ function autoScrolls() {
     function generateScrolls() {
         let upper = getRandomIntInclusive(0, 99);
         let lower = getRandomIntInclusive(0, 99);
-        let upperGrade = getGrade(upper);
-        let lowerGrade = getGrade(lower);
+        let upperGrade;
+        let lowerGrade;
+        if (scrollType === '일반') {
+            upperGrade = getGrade(upper);
+            lowerGrade = getGrade(lower);
+        } else if (scrollType === '상급') {
+            upperGrade = getGradeHigh(upper);
+            lowerGrade = getGradeHigh(lower);
+        }
         let upperOpt = getRandomIntInclusive(0, 9999);
         let lowerOpt = getRandomIntInclusive(0, 9999);
         let upperOption = getOption(upperOpt, equipSlot);
