@@ -303,6 +303,20 @@ function getValues(option, slot) {
     return value.toFixed(2);
 }
 
+const gradeDetails = {
+    'Common': { imgSrc: './img/Common.png', color: '#8D664D' },
+    'Uncommon': { imgSrc: './img/Uncommon.png', color: '#66FF66' },
+    'Rare': { imgSrc: './img/Rare.png', color: '#3399FF' },
+    'Epic': { imgSrc: './img/Epic.png', color: '#9933FF' },
+    'SuperEpic': { imgSrc: './img/SuperEpic.png', color: '#CF3D3D' }
+};
+
+function setGradeDetails(imgElement, colorElement, grade) {
+    const details = gradeDetails[grade] || { imgSrc: './img/Common.png', color: '#FFFFFF' };
+    imgElement.src = details.imgSrc;
+    colorElement.style.color = details.color;
+}
+
 let paidAmount = 0;
 let usedScrolls;
 function getOptionGrade() {
@@ -318,19 +332,6 @@ function getOptionGrade() {
     let rawUpperOption = `${upperGrade}-${upperOption}`;
     let rawLowerOption = `${lowerGrade}-${lowerOption}`;
     // console.log(`${upperGrade}-${upperOption} +${getValues(rawUpperOption)}%|${lowerGrade}-${lowerOption} +${getValues(rawLowerOption)}%`);
-    const gradeDetails = {
-        'Common': { imgSrc: './img/Common.png', color: '#8D664D' },
-        'Uncommon': { imgSrc: './img/Uncommon.png', color: '#66FF66' },
-        'Rare': { imgSrc: './img/Rare.png', color: '#3399FF' },
-        'Epic': { imgSrc: './img/Epic.png', color: '#9933FF' },
-        'SuperEpic': { imgSrc: './img/SuperEpic.png', color: '#CF3D3D' }
-    };
-
-    function setGradeDetails(imgElement, colorElement, grade) {
-        const details = gradeDetails[grade] || { imgSrc: './img/Common.png', color: '#FFFFFF' };
-        imgElement.src = details.imgSrc;
-        colorElement.style.color = details.color;
-    }
 
     setGradeDetails(upperImg, upperString, upperGrade);
     setGradeDetails(lowerImg, lowerString, lowerGrade);
@@ -364,22 +365,28 @@ function autoScrolls() {
         let lowerOption = getOption(lowerOpt, equipSlot);
         let rawUpperOption = `${upperGrade}-${upperOption}`;
         let rawLowerOption = `${lowerGrade}-${lowerOption}`;
-        // console.log("targetUpperGrade: " + targetUpperGrade + " targetUpperOption: " + targetUpperOption + "\ntargetLowerGrade: " + targetLowerGrade + " targetLowerOption: " + targetLowerOption);
-        if (targetUpperGrade === upperGrade && targetUpperOption === upperOption &&
-            targetLowerGrade === lowerGrade && targetLowerOption === lowerOption) {
-            const gradeDetails = {
-                'Common': { imgSrc: './img/Common.png', color: '#8D664D' },
-                'Uncommon': { imgSrc: './img/Uncommon.png', color: '#66FF66' },
-                'Rare': { imgSrc: './img/Rare.png', color: '#3399FF' },
-                'Epic': { imgSrc: './img/Epic.png', color: '#9933FF' },
-                'SuperEpic': { imgSrc: './img/SuperEpic.png', color: '#CF3D3D' }
-            };
 
-            function setGradeDetails(imgElement, colorElement, grade) {
-                const details = gradeDetails[grade] || { imgSrc: './img/Common.png', color: '#FFFFFF' };
-                imgElement.src = details.imgSrc;
-                colorElement.style.color = details.color;
-            }
+        function meetsCriteria(grade, option, targetGrade, targetOption) {
+            if (targetGrade === 'Common' && (grade === 'Common' || grade === 'Uncommon' || grade === "Rare" || grade === "Epic" || grade === "SuperEpic"))
+                return targetOption === option;
+
+            if (targetGrade === 'Uncommon' && (grade === 'Uncommon' || grade === "Rare" || grade === "Epic" || grade === "SuperEpic"))
+                return targetOption === option;
+
+            if (targetGrade === 'Rare' && (grade === 'Rare' || grade === 'Epic' || grade === 'SuperEpic'))
+                return targetOption === option;
+
+            if (targetGrade === 'Epic' && (grade === 'Epic' || grade === 'SuperEpic'))
+                return targetOption === option;
+
+            if (targetGrade === 'SuperEpic' && grade === 'SuperEpic')
+                return targetOption === option;
+
+            return false;
+        }
+        // console.log("targetUpperGrade: " + targetUpperGrade + " targetUpperOption: " + targetUpperOption + "\ntargetLowerGrade: " + targetLowerGrade + " targetLowerOption: " + targetLowerOption);
+        if (meetsCriteria(upperGrade, upperOption, targetUpperGrade, targetUpperOption) &&
+            meetsCriteria(lowerGrade, lowerOption, targetLowerGrade, targetLowerOption)) {
 
             setGradeDetails(upperImg, upperString, upperGrade);
             setGradeDetails(lowerImg, lowerString, lowerGrade);
@@ -402,20 +409,6 @@ function autoScrolls() {
             scrollString.innerText = usedScrolls;
             return; // 조건을 만족하면 종료
         } else {
-            const gradeDetails = {
-                'Common': { imgSrc: './img/Common.png', color: '#8D664D' },
-                'Uncommon': { imgSrc: './img/Uncommon.png', color: '#66FF66' },
-                'Rare': { imgSrc: './img/Rare.png', color: '#3399FF' },
-                'Epic': { imgSrc: './img/Epic.png', color: '#9933FF' },
-                'SuperEpic': { imgSrc: './img/SuperEpic.png', color: '#CF3D3D' }
-            };
-
-            function setGradeDetails(imgElement, colorElement, grade) {
-                const details = gradeDetails[grade] || { imgSrc: './img/Common.png', color: '#FFFFFF' };
-                imgElement.src = details.imgSrc;
-                colorElement.style.color = details.color;
-            }
-
             coinString.innerText = paidAmount;
             scrollString.innerText = usedScrolls;
 
