@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -12,7 +12,15 @@
 <body>
 <div class="main-container">
     <div class="potentials">
-        <h1>상/하의 잠재 시뮬</h1>
+        <h1>잠재 시뮬</h1>
+        <div class="selections">
+            부위:
+            <select name="equip" id="equip">
+                <option value="무기" disabled>무기</option>
+                <option value="모자" disabled>모자</option>
+                <option value="상/하의" selected>상/하의</option>
+            </select>
+        </div>
         <div class="bg"></div>
         <div class="upper">
             <div>
