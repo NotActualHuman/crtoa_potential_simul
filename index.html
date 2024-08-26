@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>쿠모탑 잠재 시뮬레이터</title>
+</head>
+<body>
+<div class="main-container">
+    <div class="potentials">
+        <h1>상/하의 잠재 시뮬</h1>
+        <div class="bg"></div>
+        <div class="upper">
+            <div>
+                <img class="upper-grade">
+            </div>
+            <div class="upper-option"></div>
+        </div>
+        <div class="lower">
+            <div>
+                <img class="lower-grade">
+            </div>
+            <div class="lower-option"></div>
+        </div>
+        <div class="currencies">
+            <span>사용한 주문서 갯수: </span><span class="scrolls"></span><br />
+            <span>사용한 코인: </span><span class="coins"></span>
+        </div>
+        <button type="button" onclick="getOptionGrade()">잠재력 변경</button>
+    </div>
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>
