@@ -359,7 +359,6 @@ function getOptionGrade() {
     let rawUpperOption = `${upperGrade}-${upperOption}`;
     let rawLowerOption = `${lowerGrade}-${lowerOption}`;
     // console.log(`${upperGrade}-${upperOption} +${getValues(rawUpperOption)}%|${lowerGrade}-${lowerOption} +${getValues(rawLowerOption)}%`);
-
     setGradeDetails(upperImg, upperString, upperGrade);
     setGradeDetails(lowerImg, lowerString, lowerGrade);
 
@@ -455,6 +454,11 @@ function autoScrolls() {
             setTimeout(generateScrolls, delay); // 딜레이 후 재귀 호출
         }
     }
-
+    paidAmount = 0;
+    usedScrolls = 0;
+    usedCash = 0;
+    coinString.innerText = 0;
+    scrollString.innerText = 0;
+    cashString.innerText = 0 + '\u20A9';
     generateScrolls(); // 최초 호출
 }
