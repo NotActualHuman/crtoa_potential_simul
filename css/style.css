@@ -56,3 +56,13 @@ body {
 .main-container {
     margin: 100px;
 }
+
+.autoscroll-options {
+    border: 1px solid white;
+    color: white;
+    padding: 100px;
+}
+
+.autoscroll-btn {
+    width: 100%;
+}
