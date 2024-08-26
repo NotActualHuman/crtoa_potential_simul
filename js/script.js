@@ -462,3 +462,16 @@ function autoScrolls() {
     cashString.innerText = 0 + '\u20A9';
     generateScrolls(); // 최초 호출
 }
+
+function resetAll() {
+    setGradeDetails(upperImg, upperString, 'Common');
+    setGradeDetails(lowerImg, lowerString, 'Common');
+    lowerString.innerText = '';
+    upperString.innerText = '';
+    paidAmount = 0;
+    usedScrolls = 0;
+    usedCash = 0;
+    coinString.innerText = 0;
+    scrollString.innerText = 0;
+    cashString.innerText = 0 + '\u20A9';
+}
