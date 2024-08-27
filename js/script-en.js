@@ -151,7 +151,7 @@ function getOptionEn(num, slot) {
 
 function getValuesEn(option, slot) {
     let optionName = option.split('-');
-    console.log(option + ' ' + slot)
+    //console.log(option + ' ' + slot)
     let baseValue;
     let value;
     if (slot === 'Top/Bottom') {
@@ -322,7 +322,7 @@ function getOptionGradeEn() {
 
     paidAmount += 20000;
     usedScrolls = paidAmount / 20000;
-    console.log(rawUpperOption + rawLowerOption);
+    //console.log(rawUpperOption + rawLowerOption);
     if (upperOption.search('Elem ATK') !== -1)
         upperStringEn.innerText = upperOption + ' +' + getValuesEn(rawUpperOption, equipSlotEn) + '';
     else
