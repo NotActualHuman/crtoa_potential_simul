@@ -463,6 +463,13 @@ function autoScrolls() {
     generateScrolls(); // 최초 호출
 }
 
+function switchLanguage(lang) {
+    const allLangs = document.querySelectorAll('.lang');
+    allLangs.forEach(el => el.classList.remove('active'));
+
+    document.getElementById(`content-${lang}`).classList.add('active');
+}
+
 function resetAll() {
     setGradeDetails(upperImg, upperString, 'Common');
     setGradeDetails(lowerImg, lowerString, 'Common');
