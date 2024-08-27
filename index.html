@@ -7,85 +7,176 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>쿠모탑 잠재 시뮬레이터</title>
+    <title>잠재 시뮬레이터</title>
+    <style>
+        .lang { display: none; }
+        .active { display: block; }
+    </style>
 </head>
 <body>
-<div class="main-container">
-    <div class="potentials">
-        <h1>잠재 시뮬</h1>
-        <div class="selections">
-            부위:
-            <select name="equip" id="equip">
-                <option value="무기" selected>무기</option>
-                <option value="모자">모자</option>
-                <option value="상/하의">상/하의</option>
-            </select>
-            <br />
-            잠재 종류:
-            <select name="type" id="type">
-                <option value="일반" selected>일반</option>
-                <option value="상급">상급</option>
-            </select>
-        </div>
-        <div class="bg"></div>
-        <div class="upper">
-            <div>
-                <img class="upper-grade">
+<!-- Language Switch Buttons -->
+<button type="button" onclick="switchLanguage('ko')">한국어</button>
+<button type="button" onclick="switchLanguage('en')">English</button>
+
+<!-- Korean Content -->
+<div id="content-ko" class="lang active">
+    <div class="main-container">
+        <div class="potentials">
+            <h1>잠재 시뮬</h1>
+            <div class="selections">
+                부위:
+                <select name="equip" id="equip">
+                    <option value="무기" selected>무기</option>
+                    <option value="모자">모자</option>
+                    <option value="상/하의">상/하의</option>
+                </select>
+                <br />
+                잠재 종류:
+                <select name="type" id="type">
+                    <option value="일반" selected>일반</option>
+                    <option value="상급">상급</option>
+                </select>
             </div>
-            <div class="upper-option"></div>
-        </div>
-        <div class="lower">
-            <div>
-                <img class="lower-grade">
+            <div class="bg"></div>
+            <div class="upper">
+                <div>
+                    <img class="upper-grade">
+                </div>
+                <div class="upper-option"></div>
             </div>
-            <div class="lower-option"></div>
-        </div>
-        <div class="currencies">
-            <span>사용한 주문서 갯수: </span><span class="scrolls"></span><br />
-            <span>사용한 코인: </span><span class="coins"></span><br />
-            <span>사용한 돈: </span><span class="cash"></span>
-        </div>
-        <button type="button" onclick="getOptionGrade()" class="buttons">잠재력 변경</button>
-        <button type="button" onclick="resetAll()" class="buttons">사용 정보 초기화</button>
-        <div class="autoscroll-options">
-            첫번째 잠재 등급
-            <select name="upper_grade" id="upper-grade">
-                <option value="SuperEpic">Super Epic</option>
-                <option value="Epic">Epic</option>
-                <option value="Rare">Rare</option>
-                <option value="Uncommon">Uncommon</option>
-                <option value="Common">Common</option>
-            </select>
-            첫번째 잠재 옵션
-            <select name="upper_option" id="upper-option">
-                <option value="공격력">공격력</option>
-                <option value="치명타 확률">치명타 확률</option>
-                <option value="치명타 피해">치명타 피해량</option>
-                <option value="버프 증폭">버프 증폭</option>
-                <option value="디버프 증폭">디버프 증폭</option>
-            </select>
-            <br />
-            두번째 잠재 등급
-            <select name="lower_grade" id="lower-grade">
-                <option value="SuperEpic">Super Epic</option>
-                <option value="Epic">Epic</option>
-                <option value="Rare">Rare</option>
-                <option value="Uncommon">Uncommon</option>
-                <option value="Common">Common</option>
-            </select>
-            두번째 잠재 옵션
-            <select name="lower_option" id="lower-option">
-                <option value="공격력">공격력</option>
-                <option value="치명타 확률">치명타 확률</option>
-                <option value="치명타 피해">치명타 피해량</option>
-                <option value="버프 증폭">버프 증폭</option>
-                <option value="디버프 증폭">디버프 증폭</option>
-            </select>
-            <br />
-            <button type="button" class="autoscroll-btn" onclick="autoScrolls()">자동 잠재 돌리기</button>
+            <div class="lower">
+                <div>
+                    <img class="lower-grade">
+                </div>
+                <div class="lower-option"></div>
+            </div>
+            <div class="currencies">
+                <span>사용한 주문서 갯수: </span><span class="scrolls"></span><br />
+                <span>사용한 코인: </span><span class="coins"></span><br />
+                <span>사용한 돈: </span><span class="cash"></span>
+            </div>
+            <button type="button" onclick="getOptionGrade()" class="buttons">잠재력 변경</button>
+            <button type="button" onclick="resetAll()" class="buttons">사용 정보 초기화</button>
+            <div class="autoscroll-options">
+                첫번째 잠재 등급
+                <select name="upper_grade" id="upper-grade">
+                    <option value="SuperEpic">Super Epic</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Rare">Rare</option>
+                    <option value="Uncommon">Uncommon</option>
+                    <option value="Common">Common</option>
+                </select>
+                첫번째 잠재 옵션
+                <select name="upper_option" id="upper-option">
+                    <option value="공격력">공격력</option>
+                    <option value="치명타 확률">치명타 확률</option>
+                    <option value="치명타 피해">치명타 피해량</option>
+                    <option value="버프 증폭">버프 증폭</option>
+                    <option value="디버프 증폭">디버프 증폭</option>
+                </select>
+                <br />
+                두번째 잠재 등급
+                <select name="lower_grade" id="lower-grade">
+                    <option value="SuperEpic">Super Epic</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Rare">Rare</option>
+                    <option value="Uncommon">Uncommon</option>
+                    <option value="Common">Common</option>
+                </select>
+                두번째 잠재 옵션
+                <select name="lower_option" id="lower-option">
+                    <option value="공격력">공격력</option>
+                    <option value="치명타 확률">치명타 확률</option>
+                    <option value="치명타 피해">치명타 피해량</option>
+                    <option value="버프 증폭">버프 증폭</option>
+                    <option value="디버프 증폭">디버프 증폭</option>
+                </select>
+                <br />
+                <button class="autoscroll-btn" onclick="autoScrolls()">자동 잠재 돌리기</button>
+            </div>
         </div>
     </div>
 </div>
-<script src="js/script.js"></script>
+
+<!-- English Content -->
+<div id="content-en" class="lang">
+    <div class="main-container">
+        <div class="potentials">
+            <h1>Hidden Power Simulator</h1>
+            <div class="selections">
+                Equipment:
+                <select name="equip-en" id="equip-en">
+                    <option value="Weapon" selected>Weapon</option>
+                    <option value="Hat">Hat</option>
+                    <option value="Top/Bottom">Top/Bottom</option>
+                </select>
+                <br />
+                Scroll Type:
+                <select name="type-en" id="type-en">
+                    <option value="Normal" selected>Normal</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+            </div>
+            <div class="bg"></div>
+            <div class="upper">
+                <div>
+                    <img class="upper-grade-en">
+                </div>
+                <div class="upper-option-en"></div>
+            </div>
+            <div class="lower">
+                <div>
+                    <img class="lower-grade-en">
+                </div>
+                <div class="lower-option-en"></div>
+            </div>
+            <div class="currencies">
+                <span>Number of Scrolls Used: </span><span class="scrolls-en"></span><br />
+                <span>Coins Used: </span><span class="coins-en"></span><br />
+            </div>
+            <button type="button" onclick="getOptionGradeEn()" class="buttons">Change Hidden Power</button>
+            <button type="button" onclick="resetAll()" class="buttons">Reset Usage Information</button>
+            <div class="autoscroll-options">
+                First Hidden Power Grade
+                <select name="upper-grade-en" id="upper-grade-en">
+                    <option value="SuperEpic">Super Epic</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Rare">Rare</option>
+                    <option value="Uncommon">Uncommon</option>
+                    <option value="Common">Common</option>
+                </select>
+                First Hidden Power Option
+                <select name="upper-option-en" id="upper-option-en">
+                    <option value="ATK">ATK</option>
+                    <option value="CRIT Rate">CRIT Rate</option>
+                    <option value="CRIT DMG">CRIT DMG</option>
+                    <option value="Buff AMP">Buff AMP</option>
+                    <option value="Debuff AMP">Debuff AMP</option>
+                </select>
+                <br />
+                Second Hidden Power Grade
+                <select name="lower-grade-en" id="lower-grade-en">
+                    <option value="SuperEpic">Super Epic</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Rare">Rare</option>
+                    <option value="Uncommon">Uncommon</option>
+                    <option value="Common">Common</option>
+                </select>
+                Second Hidden Power Option
+                <select name="lower-option-en" id="lower-option-en">
+                    <option value="ATK">ATK</option>
+                    <option value="CRIT Rate">CRIT Rate</option>
+                    <option value="CRIT DMG">CRIT DMG</option>
+                    <option value="Buff AMP">Buff AMP</option>
+                    <option value="Debuff AMP">Debuff AMP</option>
+                </select>
+                <br />
+                <button class="autoscroll-btn" onclick="autoScrollsEn()">Auto Scroll</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./js/script-en.js"></script>
+<script src="./js/script.js"></script>
 </body>
 </html>
