@@ -421,7 +421,9 @@ function autoScrolls() {
         }
         // console.log("targetUpperGrade: " + targetUpperGrade + " targetUpperOption: " + targetUpperOption + "\ntargetLowerGrade: " + targetLowerGrade + " targetLowerOption: " + targetLowerOption);
         if (meetsCriteria(upperGrade, upperOption, targetUpperGrade, targetUpperOption) &&
-            meetsCriteria(lowerGrade, lowerOption, targetLowerGrade, targetLowerOption)) {
+            meetsCriteria(lowerGrade, lowerOption, targetLowerGrade, targetLowerOption) ||
+            meetsCriteria(upperGrade, upperOption, targetLowerGrade, targetLowerOption) &&
+            meetsCriteria(lowerGrade, lowerOption, targetUpperGrade, targetUpperOption)) {
 
             setGradeDetails(upperImg, upperString, upperGrade);
             setGradeDetails(lowerImg, lowerString, lowerGrade);
